@@ -2,6 +2,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-contrib-connect')
   grunt.loadNpmTasks('grunt-contrib-watch')
   grunt.loadNpmTasks('grunt-contrib-coffee')
+  grunt.loadNpmTasks('grunt-contrib-handlebars')
 
   grunt.initConfig
     pkg: grunt.file.readJSON('package.json')
@@ -12,7 +13,7 @@ module.exports = (grunt) ->
     watch:
         scripts:
             files: ['**/*.coffee', '**/*.json', '**/*.hbs']
-            tasks: ['coffee']
+            tasks: ['handlebars', 'coffee']
             options:
                 spawn: false
     coffee:
@@ -20,5 +21,12 @@ module.exports = (grunt) ->
             files:
                 # compile and concat into single file
                 'app/scripts/main.js': ['app/*.coffee']
+    handlebars:
+        options:
+            namespace: 'Templates'
+            amd: true
+        compile:
+            files:
+                'app/scripts/templates.js' : [ 'app/templates/**/*.hbs']
 
-  grunt.registerTask('default', ['coffee', 'connect', 'watch'])
+  grunt.registerTask('default', ['coffee', 'handlebars', 'connect', 'watch'])
