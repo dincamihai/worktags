@@ -1,0 +1,13 @@
+node_modules/
+app/assets/bower_components/
+app/assets/js
+app/assets/css
+app/index.html
+app/assets/css/
+app/build
+test/
+test/spec/
+test/SpecRunner.js
+dist/
+sandbox.*
+.grunt

@@ -1,0 +1,15 @@
+{
+  "name": "knex",
+  "homepage": "https://github.com/tgriesser/knex",
+  "version": "0.6.22",
+  "_release": "0.6.22",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.6.22",
+    "commit": "222ac82a5af002e4b53394f6b936ca8d19f5bb86"
+  },
+  "_source": "git://github.com/tgriesser/knex.git",
+  "_target": "~0.6.22",
+  "_originalSource": "knex",
+  "_direct": true
+}

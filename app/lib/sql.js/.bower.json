@@ -1,0 +1,14 @@
+{
+  "name": "sql.js",
+  "homepage": "https://github.com/kripken/sql.js",
+  "_release": "e16ae3cf8e",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e16ae3cf8e02ac9cd141b80bd475cd447896d586"
+  },
+  "_source": "git://github.com/kripken/sql.js.git",
+  "_target": "*",
+  "_originalSource": "sql.js",
+  "_direct": true
+}
