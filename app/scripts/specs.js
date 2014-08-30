@@ -20,10 +20,10 @@
     }
   });
 
-  define(['boot'], function() {
+  define(['boot', 'main'], function(boot, app) {
     return describe('app', function() {
-      return it('should run tests', function() {
-        return expect(true).toBe(true);
+      return it('should show the input area', function() {
+        debugger;
       });
     });
   });

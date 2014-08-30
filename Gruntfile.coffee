@@ -19,19 +19,12 @@ module.exports = (grunt) ->
     coffee:
         main:
             files:
-                # compile and concat into single file
-                'app/scripts/main.js': ['app/main.coffee']
-        start:
-            files:
-                # compile and concat into single file
                 'app/scripts/start.js': ['app/start.coffee']
+                'app/scripts/main.js': ['app/main.coffee']
+                'app/scripts/views.js': ['app/views.coffee']
         main_test:
             files:
-                # compile and concat into single file
                 'app/scripts/test.js': ['app/test.coffee']
-        specs:
-            files:
-                # compile and concat into single file
                 'app/scripts/specs.js': ['app/specs.coffee']
     handlebars:
         options:

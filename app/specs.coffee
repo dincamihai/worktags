@@ -13,7 +13,7 @@ require.config
             deps: ['jasmine', 'jasmine_html']
             exports: 'window.jasmineRequire'
 
-define ['boot'], ->
+define ['boot', 'main'], (boot, app) ->
     describe 'app', ->
-        it 'should run tests', () ->
-            expect(true).toBe(true)
+        it 'should show the input area', () ->
+            debugger
