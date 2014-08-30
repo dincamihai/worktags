@@ -17,10 +17,22 @@ module.exports = (grunt) ->
             options:
                 spawn: false
     coffee:
-        compile:
+        main:
             files:
                 # compile and concat into single file
-                'app/scripts/main.js': ['app/*.coffee']
+                'app/scripts/main.js': ['app/main.coffee']
+        start:
+            files:
+                # compile and concat into single file
+                'app/scripts/start.js': ['app/start.coffee']
+        main_test:
+            files:
+                # compile and concat into single file
+                'app/scripts/test.js': ['app/test.coffee']
+        specs:
+            files:
+                # compile and concat into single file
+                'app/scripts/specs.js': ['app/specs.coffee']
     handlebars:
         options:
             namespace: 'Templates'

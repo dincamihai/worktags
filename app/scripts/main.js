@@ -40,16 +40,27 @@
   });
 
   define(['backbone', 'marionette', 'templates', 'sql'], function(Backbone, Marionette, Templates, Sql) {
-    window.jlog = {};
-    jlog.create_app = function() {
-      var App, CommandView, command_view, layout, log_view;
-      App = new Backbone.Marionette.Application;
-      App.addRegions({
-        content: '#content'
-      });
-      Backbone.Marionette.Region.prototype.attachHtml = function(view) {
-        return this.$el.replaceWith(view.el);
-      };
+    var App, CommandView;
+    Backbone.Marionette.Region.prototype.attachHtml = function(view) {
+      return this.$el.replaceWith(view.el);
+    };
+    CommandView = Backbone.Marionette.ItemView.extend({
+      template: Templates["app/templates/command.hbs"],
+      className: "span8",
+      id: "command",
+      onRender: function() {
+        return this.$('#command-line').selectize({
+          create: true,
+          persist: false
+        });
+      }
+    });
+    App = new Backbone.Marionette.Application;
+    App.addRegions({
+      content: '#content'
+    });
+    App.addInitializer(function(options) {
+      var command_view, layout, log_view;
       layout = new Backbone.Marionette.LayoutView({
         template: Templates["app/templates/layout.hbs"],
         className: "container-fluid",
@@ -59,28 +70,16 @@
           log: "#log"
         }
       });
-      CommandView = Backbone.Marionette.ItemView.extend({
-        template: Templates["app/templates/command.hbs"],
-        className: "span8",
-        id: "command",
-        onRender: function() {
-          return this.$('#command-line').selectize({
-            create: true,
-            persist: false
-          });
-        }
-      });
       command_view = new CommandView();
       log_view = new Backbone.Marionette.ItemView({
         template: Templates["app/templates/log.hbs"],
         className: "span8",
         id: "log"
       });
-      App.content.show(layout);
-      layout.command.show(command_view);
-      return App;
-    };
-    return jlog.app = jlog.create_app();
+      this.content.show(layout);
+      return layout.command.show(command_view);
+    });
+    return App;
   });
 
 }).call(this);

@@ -1,4 +1,4 @@
-require.config({
+require.config
     paths:
         bootstrap: 'bootstrap/dist/js/bootstrap.min'
         backbone: 'backbone/backbone'
@@ -27,51 +27,50 @@ require.config({
             exports: 'Handlebars'
         templates:
             deps: ['selectize']
-})
 
 define(
     ['backbone', 'marionette', 'templates', 'sql'],
     (Backbone, Marionette, Templates, Sql) ->
-        window.jlog = {}
-        jlog.create_app = ->
 
-            App = new Backbone.Marionette.Application
-            App.addRegions(content: '#content')
+        Backbone.Marionette.Region.prototype.attachHtml = (view) ->
+            this.$el.replaceWith(view.el)
 
-            Backbone.Marionette.Region.prototype.attachHtml = (view) ->
-                this.$el.replaceWith(view.el)
+        CommandView = Backbone.Marionette.ItemView.extend
+            template: Templates["app/templates/command.hbs"]
+            className: "span8"
+            id: "command"
+            onRender: ->
+                this.$('#command-line').selectize(
+                    create: true
+                    persist: false
+                )
 
-            layout = new Backbone.Marionette.LayoutView({
-                template: Templates["app/templates/layout.hbs"]
-                className: "container-fluid"
-                id: "content"
-                regions:
-                    command: "#command"
-                    log: "#log"
-            })
+        App = new Backbone.Marionette.Application
 
-            CommandView = Backbone.Marionette.ItemView.extend
-                template: Templates["app/templates/command.hbs"]
-                className: "span8"
-                id: "command"
-                onRender: ->
-                    this.$('#command-line').selectize(
-                        create: true
-                        persist: false
-                    )
+        App.addRegions(content: '#content')
 
-            command_view = new CommandView()
+        App.addInitializer(
+            (options) ->
+                layout = new Backbone.Marionette.LayoutView({
+                    template: Templates["app/templates/layout.hbs"]
+                    className: "container-fluid"
+                    id: "content"
+                    regions:
+                        command: "#command"
+                        log: "#log"
+                })
 
-            log_view = new Backbone.Marionette.ItemView({
-                template: Templates["app/templates/log.hbs"]
-                className: "span8"
-                id: "log"
-            })
+                command_view = new CommandView()
 
-            App.content.show(layout)
-            layout.command.show(command_view)
-            return App
+                log_view = new Backbone.Marionette.ItemView({
+                    template: Templates["app/templates/log.hbs"]
+                    className: "span8"
+                    id: "log"
+                })
 
-        jlog.app = jlog.create_app()
+                this.content.show(layout)
+                layout.command.show(command_view)
+        )
 
+        return App
 )
