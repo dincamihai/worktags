@@ -9,6 +9,8 @@ module.exports = (grunt) ->
     connect:
         server:
             options:
+                context: '/app'
+                hostname: "0.0.0.0"
                 port: 8000
     watch:
         scripts:
@@ -22,10 +24,11 @@ module.exports = (grunt) ->
                 'app/scripts/start.js': ['app/start.coffee']
                 'app/scripts/main.js': ['app/main.coffee']
                 'app/scripts/views.js': ['app/views.coffee']
+                'app/scripts/models.js': ['app/models.coffee']
         main_test:
             files:
                 'app/scripts/test.js': ['app/test.coffee']
-                'app/scripts/specs.js': ['app/specs.coffee']
+                'app/scripts/specs.js': ['app/test_*.coffee']
     handlebars:
         options:
             namespace: 'Templates'

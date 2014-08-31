@@ -1,7 +1,24 @@
-define [], ->
+define ['moment', 'models'], (moment, models) ->
+    views = {}
+
+    LogEntryView = Backbone.Marionette.ItemView.extend
+        template: Templates["app/templates/logentry.hbs"]
+        templateHelpers:
+            showEnd: ->
+                moment(this.end).format('h:mm:ss a')
+        tagName: "tr"
+
+
+    LogEntriesCollectionView = Backbone.Marionette.CollectionView.extend
+        collection: new models.LogEntriesCollection
+        childView: LogEntryView
+        template: Templates["app/templates/log.hbs"]
+        id: "log-entries"
+        tagName: "table"
+        className: "table"
+
     CommandView = Backbone.Marionette.ItemView.extend
         template: Templates["app/templates/command.hbs"]
-        className: "span8"
         id: "command"
         onRender: ->
             this.$('#command-line').selectize(
@@ -11,21 +28,15 @@ define [], ->
 
     layout = new Backbone.Marionette.LayoutView({
         template: Templates["app/templates/layout.hbs"]
-        className: "container-fluid"
         id: "content"
         regions:
             command: "#command"
-            log: "#log"
-    })
-
-    log_view = new Backbone.Marionette.ItemView({
-        template: Templates["app/templates/log.hbs"]
-        className: "span8"
-        id: "log"
+            log_entries: '#log-entries'
     })
 
     return {
+        LogEntryView: LogEntryView
+        LogEntriesCollectionView: LogEntriesCollectionView
         command_view: new CommandView()
         layout: layout
-        log_view: log_view
     }
