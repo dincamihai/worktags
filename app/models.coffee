@@ -2,7 +2,7 @@ define(['backbone', 'moment'], (Backbone, moment) ->
     models = {}
     models.LogEntryModel = Backbone.Model.extend
         initialize: ->
-            end: moment()
+            this.set('end', moment())
     models.LogEntriesCollection = Backbone.Collection.extend
         model: models.LogEntryModel
         initialize: ->
