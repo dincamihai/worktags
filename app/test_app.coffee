@@ -1,12 +1,10 @@
 require.config
     paths:
         jquery: 'jquery/dist/jquery.min'
-        bootstrap: 'bootstrap/js/bootstrap.min'
         backbone: 'backbone/backbone'
         underscore: 'underscore/underscore'
         marionette: 'marionette/lib/backbone.marionette'
         handlebars: 'handlebars/handlebars.min'
-        templates: 'templates'
         sql: 'sql.js/js/sql'
         knex: 'knex/knex',
         selectize: 'selectize/selectize'
@@ -14,13 +12,9 @@ require.config
         jasmine_html: 'jasmine/jasmine-html'
         boot: 'jasmine/custom-boot'
         moment: 'moment/moment.min'
-        views: 'build/views'
-        models: 'build/models'
     shim :
         jquery:
             exports: 'jQuery'
-        bootstrap:
-            deps: ['jquery']
         underscore:
             exports: '_'
         backbone:
@@ -33,8 +27,6 @@ require.config
             deps: ['jquery']
         handlebars:
             exports: 'Handlebars'
-        templates:
-            deps: ['selectize']
         jasmine:
             exports: 'window.jasmineRequire'
         jasmine_html:
@@ -43,13 +35,6 @@ require.config
         boot:
             deps: ['jasmine', 'jasmine_html']
             exports: 'window.jasmineRequire'
-        "build/models":
-            deps: ['moment']
-        "build/views":
-            deps: [
-                'jquery', 'bootstrap', 'underscore', 'backbone',
-                'marionette', 'handlebars', 'build/templates', 'selectize'
-            ]
 
 define ['boot', 'moment', 'build/models', 'build/views'], (boot, moment, models, views) ->
 

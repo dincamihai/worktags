@@ -1,24 +1,45 @@
-define ['moment', 'build/models'], (moment, models) ->
+require.config
+    paths:
+        backbone: 'backbone/backbone'
+        underscore: 'underscore/underscore'
+        marionette: 'marionette/lib/backbone.marionette'
+        templates: 'build/templates'
+        moment: 'moment/moment.min'
+    shim:
+        jquery:
+            exports: 'jQuery'
+        bootstrap:
+            deps: ['jquery']
+        underscore:
+            exports: '_'
+        backbone:
+            deps: ['jquery', 'underscore']
+            exports: 'Backbone'
+        marionette:
+            deps: ['jquery', 'underscore', 'backbone']
+            exports: 'Marionette'
+        selectize: 'selectize/selectize'
+
+define ['marionette', 'moment', 'build/models', 'build/templates', 'selectize'], (marionette, moment, models, templates, selectize) ->
     views = {}
 
-    LogEntryView = Backbone.Marionette.ItemView.extend
-        template: Templates["app/templates/logentry.hbs"]
+    LogEntryView = marionette.ItemView.extend
+        template: templates["app/templates/logentry.hbs"]
         templateHelpers:
             showEnd: ->
                 moment(this.end).format('h:mm:ss a')
         tagName: "tr"
 
-
-    LogEntriesCollectionView = Backbone.Marionette.CollectionView.extend
+    LogEntriesCollectionView = marionette.CollectionView.extend
         collection: new models.LogEntriesCollection
         childView: LogEntryView
-        template: Templates["app/templates/log.hbs"]
+        template: templates["app/templates/log.hbs"]
         id: "log-entries"
         tagName: "table"
         className: "table"
 
-    CommandView = Backbone.Marionette.ItemView.extend
-        template: Templates["app/templates/command.hbs"]
+    CommandView = marionette.ItemView.extend
+        template: templates["app/templates/command.hbs"]
         id: "command"
         events:
             "click #add-log-entry": 'addLogEntry'
@@ -35,8 +56,8 @@ define ['moment', 'build/models'], (moment, models) ->
             globalCh = Backbone.Wreqr.radio.channel('global')
             globalCh.vent.trigger('entry:add', entry)
 
-    layout = new Backbone.Marionette.LayoutView({
-        template: Templates["app/templates/layout.hbs"]
+    layout = new marionette.LayoutView({
+        template: templates["app/templates/layout.hbs"]
         id: "content"
         regions:
             command: "#command"

@@ -7,13 +7,7 @@
       underscore: 'underscore/underscore',
       marionette: 'marionette/lib/backbone.marionette',
       handlebars: 'handlebars/handlebars.min',
-      templates: 'templates',
-      sql: 'sql.js/js/sql',
-      knex: 'knex/knex',
-      selectize: 'selectize/selectize',
-      moment: 'moment/moment.min',
-      models: 'build/models',
-      views: 'build/views'
+      selectize: 'selectize/selectize'
     },
     shim: {
       bootstrap: {
@@ -24,12 +18,6 @@
       },
       main: {
         deps: ['backbone', 'marionette']
-      },
-      "build/models": {
-        deps: ['moment']
-      },
-      "build/views": {
-        deps: ['jquery', 'bootstrap', 'underscore', 'backbone', 'marionette', 'handlebars', 'build/templates', 'build/models', 'selectize', 'moment']
       }
     }
   });
