@@ -22,19 +22,19 @@ module.exports = (grunt) ->
         main:
             files:
                 'app/scripts/start.js': ['app/start.coffee']
-                'app/scripts/main.js': ['app/main.coffee']
-                'app/scripts/views.js': ['app/views.coffee']
-                'app/scripts/models.js': ['app/models.coffee']
+                'app/scripts/build/main.js': ['app/main.coffee']
+                'app/scripts/build/views.js': ['app/views.coffee']
+                'app/scripts/build/models.js': ['app/models.coffee']
         main_test:
             files:
                 'app/scripts/test.js': ['app/test.coffee']
-                'app/scripts/specs.js': ['app/test_*.coffee']
+                'app/scripts/build/specs.js': ['app/test_*.coffee']
     handlebars:
         options:
             namespace: 'Templates'
             amd: true
         compile:
             files:
-                'app/scripts/templates.js' : [ 'app/templates/**/*.hbs']
+                'app/scripts/build/templates.js' : [ 'app/templates/**/*.hbs']
 
   grunt.registerTask('default', ['coffee', 'handlebars', 'connect', 'watch'])

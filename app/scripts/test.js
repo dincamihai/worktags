@@ -1,5 +1,5 @@
 (function() {
-  define(['specs'], function() {
+  define(['build/specs'], function() {
     return executeTests();
   });
 

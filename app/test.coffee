@@ -1,2 +1,2 @@
-define ['specs'], ->
+define ['build/specs'], ->
     executeTests()

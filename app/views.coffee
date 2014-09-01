@@ -1,4 +1,4 @@
-define ['moment', 'models'], (moment, models) ->
+define ['moment', 'build/models'], (moment, models) ->
     views = {}
 
     LogEntryView = Backbone.Marionette.ItemView.extend

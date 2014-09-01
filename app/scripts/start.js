@@ -12,7 +12,8 @@
       knex: 'knex/knex',
       selectize: 'selectize/selectize',
       moment: 'moment/moment.min',
-      views: 'views'
+      models: 'build/models',
+      views: 'build/views'
     },
     shim: {
       bootstrap: {
@@ -24,16 +25,16 @@
       main: {
         deps: ['backbone', 'marionette']
       },
-      models: {
+      "build/models": {
         deps: ['moment']
       },
-      views: {
-        deps: ['jquery', 'bootstrap', 'underscore', 'backbone', 'marionette', 'handlebars', 'templates', 'models', 'selectize', 'moment']
+      "build/views": {
+        deps: ['jquery', 'bootstrap', 'underscore', 'backbone', 'marionette', 'handlebars', 'build/templates', 'build/models', 'selectize', 'moment']
       }
     }
   });
 
-  define(['main', 'models', 'views'], function(main, models, views) {
+  define(['build/main', 'build/models', 'build/views'], function(main, models, views) {
     var app, options;
     options = {
       regions: {

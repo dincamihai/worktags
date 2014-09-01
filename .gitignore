@@ -4,7 +4,7 @@ app/assets/js
 app/assets/css
 app/index.html
 app/assets/css/
-app/build
+app/scripts/build
 test/
 test/spec/
 test/SpecRunner.js

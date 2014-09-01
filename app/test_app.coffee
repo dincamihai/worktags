@@ -10,11 +10,12 @@ require.config
         sql: 'sql.js/js/sql'
         knex: 'knex/knex',
         selectize: 'selectize/selectize'
-        views: 'views'
         jasmine: 'jasmine/jasmine'
         jasmine_html: 'jasmine/jasmine-html'
         boot: 'jasmine/custom-boot'
         moment: 'moment/moment.min'
+        views: 'build/views'
+        models: 'build/models'
     shim :
         jquery:
             exports: 'jQuery'
@@ -42,15 +43,15 @@ require.config
         boot:
             deps: ['jasmine', 'jasmine_html']
             exports: 'window.jasmineRequire'
-        models:
+        "build/models":
             deps: ['moment']
-        views:
+        "build/views":
             deps: [
                 'jquery', 'bootstrap', 'underscore', 'backbone',
-                'marionette', 'handlebars', 'templates', 'selectize'
+                'marionette', 'handlebars', 'build/templates', 'selectize'
             ]
 
-define ['boot', 'moment', 'models', 'views'], (boot, moment, models, views) ->
+define ['boot', 'moment', 'build/models', 'build/views'], (boot, moment, models, views) ->
 
     describe 'views', ->
         it 'should have a LogEntriesCollectionView', () ->
