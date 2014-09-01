@@ -20,11 +20,20 @@ define ['moment', 'models'], (moment, models) ->
     CommandView = Backbone.Marionette.ItemView.extend
         template: Templates["app/templates/command.hbs"]
         id: "command"
+        events:
+            "click #add-log-entry": 'addLogEntry'
         onRender: ->
-            this.$('#command-line').selectize(
+            $select = this.$('#command-line').selectize(
                 create: true
                 persist: false
             )
+            this.selectize = $select[0].selectize
+        addLogEntry: ->
+            tags = this.selectize.getValue().split(',')
+            entry = new models.LogEntryModel
+                tags: tags
+            globalCh = Backbone.Wreqr.radio.channel('global')
+            globalCh.vent.trigger('entry:add', entry)
 
     layout = new Backbone.Marionette.LayoutView({
         template: Templates["app/templates/layout.hbs"]
@@ -38,5 +47,6 @@ define ['moment', 'models'], (moment, models) ->
         LogEntryView: LogEntryView
         LogEntriesCollectionView: LogEntriesCollectionView
         command_view: new CommandView()
+        entries_view: new LogEntriesCollectionView()
         layout: layout
     }

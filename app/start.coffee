@@ -34,11 +34,10 @@ define(['main', 'models', 'views'], (main, models, views) ->
             content: '#content'
         initializers: [
             () ->
-                entries_view = new views.LogEntriesCollectionView(
-                )
+                this.command_view = views.command_view
                 this.content.show(views.layout)
                 views.layout.command.show(views.command_view)
-                views.layout.log_entries.show(entries_view)
+                views.layout.log_entries.show(views.entries_view)
         ]
 
     app = main.create_app(options)

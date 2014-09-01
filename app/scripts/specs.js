@@ -66,10 +66,6 @@
 
   define(['boot', 'moment', 'models', 'views'], function(boot, moment, models, views) {
     describe('views', function() {
-      it('should show the input area', function() {
-        views.command_view.render();
-        return expect(views.command_view.$el.find('input').attr('placeholder')).toEqual('Add new task tags');
-      });
       it('should have a LogEntriesCollectionView', function() {
         return expect(views.LogEntriesCollectionView).not.toBe(void 0);
       });
@@ -95,7 +91,7 @@
           return expect(view.$el.find('td:eq(1)').text()).toEqual("#tag1,@tag2");
         });
       });
-      return describe('log entries collection view', function() {
+      describe('log entries collection view', function() {
         return it('should list all entries', function() {
           var entries_view;
           entries_view = new views.LogEntriesCollectionView({
@@ -109,6 +105,18 @@
           expect(entries_view.$el.is('table')).toBe(true);
           expect(entries_view.$el.attr('class')).toEqual("table");
           return expect(entries_view.$el.find('tr').length).toEqual(1);
+        });
+      });
+      return describe('command view', function() {
+        it('should show the input area', function() {
+          views.command_view.render();
+          return expect(views.command_view.$el.find('input').attr('placeholder')).toEqual('Add new task tags');
+        });
+        return it('should add a new entry', function() {
+          views.command_view.render();
+          views.command_view.selectize.createItem('#tag1');
+          views.command_view.$el.find('#add-log-entry').click();
+          return expect(views.entries_view.$el.find('tr').length).toEqual(1);
         });
       });
     });

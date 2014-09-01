@@ -51,13 +51,8 @@ require.config
             ]
 
 define ['boot', 'moment', 'models', 'views'], (boot, moment, models, views) ->
-    describe 'views', ->
-        it 'should show the input area', () ->
-            views.command_view.render()
-            expect(
-                views.command_view.$el.find('input').attr('placeholder')
-            ).toEqual('Add new task tags')
 
+    describe 'views', ->
         it 'should have a LogEntriesCollectionView', () ->
             expect(views.LogEntriesCollectionView).not.toBe(undefined)
 
@@ -94,6 +89,20 @@ define ['boot', 'moment', 'models', 'views'], (boot, moment, models, views) ->
                 expect(entries_view.$el.is('table')).toBe(true)
                 expect(entries_view.$el.attr('class')).toEqual("table")
                 expect(entries_view.$el.find('tr').length).toEqual(1)
+
+        describe 'command view', ->
+
+            it 'should show the input area', () ->
+                views.command_view.render()
+                expect(
+                    views.command_view.$el.find('input').attr('placeholder')
+                ).toEqual('Add new task tags')
+
+            it 'should add a new entry', () ->
+                views.command_view.render()
+                views.command_view.selectize.createItem('#tag1')
+                views.command_view.$el.find('#add-log-entry').click()
+                expect(views.entries_view.$el.find('tr').length).toEqual(1)
 
     describe 'models', ->
         it 'should have a LogEntryModel', () ->
