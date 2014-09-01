@@ -113,7 +113,7 @@ define ['boot', 'moment', 'models', 'views'], (boot, moment, models, views) ->
 
         describe 'log-entry', ->
             it 'should have an end datetime', () ->
-                log_entry = new models.LogEntryModel
+                log_entry = new models.LogEntryModel()
                 expect(
                     log_entry.get('end').toDate() - Date.now()
                 ).toBeLessThan(100)

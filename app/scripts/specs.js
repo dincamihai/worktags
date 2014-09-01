@@ -130,7 +130,7 @@
       return describe('log-entry', function() {
         return it('should have an end datetime', function() {
           var log_entry;
-          log_entry = new models.LogEntryModel;
+          log_entry = new models.LogEntryModel();
           return expect(log_entry.get('end').toDate() - Date.now()).toBeLessThan(100);
         });
       });

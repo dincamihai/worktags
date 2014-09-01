@@ -3,8 +3,10 @@
     var models;
     models = {};
     models.LogEntryModel = Backbone.Model.extend({
-      defaults: {
-        end: moment()
+      initialize: function() {
+        return {
+          end: moment()
+        };
       }
     });
     models.LogEntriesCollection = Backbone.Collection.extend({
