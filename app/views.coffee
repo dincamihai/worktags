@@ -1,32 +1,12 @@
-require.config
-    paths:
-        jquery: 'jquery/dist/jquery.min'
-        underscore: 'underscore/underscore'
-        bootstrap: 'bootstrap/js/bootstrap.min'
-        backbone: 'backbone/backbone'
-        marionette: 'marionette/lib/backbone.marionette'
-        handlebars: 'handlebars/handlebars.min'
-        selectize: 'selectize/selectize'
-        moment: 'moment/moment.min'
-    shim:
-        jquery:
-            exports: 'jQuery'
-        bootstrap:
-            deps: ['jquery']
-        underscore:
-            exports: '_'
-        backbone:
-            deps: ['jquery', 'underscore']
-            exports: 'Backbone'
-        marionette:
-            deps: ['jquery', 'underscore', 'backbone']
-            exports: 'Marionette'
-        handlebars:
-            exports: 'Handlebars'
-        "build/templates":
-            deps: ['jquery', 'handlebars']
+define (require) ->
 
-define ['marionette', 'moment', 'build/models', 'build/templates', 'bootstrap', 'selectize'], (marionette, moment, models, templates, bootstrap,  selectize) ->
+    marionette = require('marionette')
+    moment = require('moment')
+    models = require('build/models')
+    templates = require('build/templates')
+    bootstrap = require('bootstrap')
+    selectize = require('selectize')
+
     views = {}
 
     LogEntryView = marionette.ItemView.extend
