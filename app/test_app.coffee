@@ -48,8 +48,17 @@ define ['moment', 'build/models', 'build/views'], (moment, models, views) ->
 
             it 'should add a new entry', () ->
                 views.command_view.render()
-                views.command_view.selectize.createItem('#tag1')
-                views.command_view.$el.find('#add-log-entry').click()
+                views.command_view.selectize.items = ['#tag1']
+
+                # PRESS ENTER
+                event = $.Event('keydown')
+                event.keyCode = 13
+                views.command_view.selectize.$control_input.trigger(event)
+
+                expect(views.entries_view.collection.models.length).toEqual(1)
+                expect(
+                    views.entries_view.collection.models[0].get('tags')
+                ).toEqual(['#tag1'])
                 expect(views.entries_view.$el.find('tr').length).toEqual(1)
 
     describe 'models', ->

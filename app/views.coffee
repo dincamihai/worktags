@@ -1,13 +1,11 @@
 define (require) ->
-
+    backbone = require('backbone')
     marionette = require('marionette')
     moment = require('moment')
     models = require('build/models')
     templates = require('build/templates')
     bootstrap = require('bootstrap')
     selectize = require('selectize')
-
-    views = {}
 
     LogEntryView = marionette.ItemView.extend
         template: templates["app/templates/logentry.hbs"]
@@ -27,20 +25,29 @@ define (require) ->
     CommandView = marionette.ItemView.extend
         template: templates["app/templates/command.hbs"]
         id: "command"
-        events:
-            "click #add-log-entry": 'addLogEntry'
         onRender: ->
             $select = this.$('#command-line').selectize(
                 create: true
                 persist: false
             )
             this.selectize = $select[0].selectize
-        addLogEntry: ->
-            tags = this.selectize.getValue().split(',')
-            entry = new models.LogEntryModel
-                tags: tags
-            globalCh = Backbone.Wreqr.radio.channel('global')
-            globalCh.vent.trigger('entry:add', entry)
+            this.selectize.$control_input.on('keydown', (event) =>
+                if event.keyCode == 13
+                    globalCh = backbone.Wreqr.radio.channel 'global'
+                    globalCh.vent.trigger(
+                        'selectize:submit', this.addLogEntry(
+                            this.selectize.getValue()
+                        )
+                    )
+            )
+        addLogEntry: (value)->
+            if value.length != 0
+                tags = value.split(',')
+                entry = new models.LogEntryModel
+                    tags: tags
+                globalCh = Backbone.Wreqr.radio.channel('global')
+                globalCh.vent.trigger('entry:add', entry)
+                this.selectize.clear()
 
     layout = new marionette.LayoutView({
         template: templates["app/templates/layout.hbs"]
