@@ -1,42 +1,4 @@
-require.config
-    paths:
-        jquery: 'jquery/dist/jquery.min'
-        backbone: 'backbone/backbone'
-        underscore: 'underscore/underscore'
-        marionette: 'marionette/lib/backbone.marionette'
-        handlebars: 'handlebars/handlebars.min'
-        sql: 'sql.js/js/sql'
-        knex: 'knex/knex',
-        selectize: 'selectize/selectize'
-        jasmine: 'jasmine/jasmine'
-        jasmine_html: 'jasmine/jasmine-html'
-        boot: 'jasmine/custom-boot'
-        moment: 'moment/moment.min'
-    shim :
-        jquery:
-            exports: 'jQuery'
-        underscore:
-            exports: '_'
-        backbone:
-            deps: ['jquery', 'underscore']
-            exports: 'Backbone'
-        marionette:
-            deps: ['jquery', 'underscore', 'backbone']
-            exports: 'Marionette'
-        selectize:
-            deps: ['jquery']
-        handlebars:
-            exports: 'Handlebars'
-        jasmine:
-            exports: 'window.jasmineRequire'
-        jasmine_html:
-            deps: ['jasmine']
-            exports: 'window.jasmineRequire'
-        boot:
-            deps: ['jasmine', 'jasmine_html']
-            exports: 'window.jasmineRequire'
-
-define ['boot', 'moment', 'build/models', 'build/views'], (boot, moment, models, views) ->
+define ['moment', 'build/models', 'build/views'], (moment, models, views) ->
 
     describe 'views', ->
         it 'should have a LogEntriesCollectionView', () ->

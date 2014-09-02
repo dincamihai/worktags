@@ -25,6 +25,7 @@ module.exports = (grunt) ->
                 'app/scripts/build/main.js': ['app/main.coffee']
                 'app/scripts/build/views.js': ['app/views.coffee']
                 'app/scripts/build/models.js': ['app/models.coffee']
+                'app/scripts/build/config.js': ['app/config.coffee']
         main_test:
             files:
                 'app/scripts/test.js': ['app/test.coffee']

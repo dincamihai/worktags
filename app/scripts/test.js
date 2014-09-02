@@ -1,5 +1,5 @@
 (function() {
-  define(['build/specs'], function() {
+  define(['boot', 'build/specs'], function() {
     return executeTests();
   });
 

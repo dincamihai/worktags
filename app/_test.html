@@ -10,8 +10,11 @@
     </link>
     <link href="scripts/jasmine/jasmine.css" rel="stylesheet">
     </link>
-    <script
-      data-main="scripts/test" src="scripts/require/require.js">
+    <script src="scripts/require/require.js"></script>
+    <script>
+      require(['require', './scripts/build/config'], function(require, config) {
+        require(['test']);
+      });
     </script>
   </head>
   <body></body>

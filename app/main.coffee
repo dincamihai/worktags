@@ -1,11 +1,11 @@
-define(['backbone', 'marionette'], (Backbone, Marionette) ->
+define ['marionette'], (marionette) ->
     main = {}
     main.create_app = (options) ->
 
-        Backbone.Marionette.Region.prototype.attachHtml = (view) ->
+        marionette.Region.prototype.attachHtml = (view) ->
             this.$el.replaceWith(view.el)
 
-        App = new Backbone.Marionette.Application
+        App = new marionette.Application
             regions: options.regions
 
         for initializer in options.initializers
@@ -15,4 +15,3 @@ define(['backbone', 'marionette'], (Backbone, Marionette) ->
         return App
 
     return main
-)
