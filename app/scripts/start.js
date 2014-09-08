@@ -1,6 +1,10 @@
 (function() {
-  define(['build/main', 'build/models', 'build/views'], function(main, models, views) {
-    var app, options;
+  define(function(require) {
+    var app, main, models, options, views, _;
+    _ = require('underscore');
+    main = require('build/main');
+    models = require('build/models');
+    views = require('build/views');
     options = {
       regions: {
         content: '#content'

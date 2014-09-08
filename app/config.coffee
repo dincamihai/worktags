@@ -5,8 +5,6 @@ require.config
         underscore: 'underscore/underscore'
         backbone: 'backbone/backbone'
         marionette: 'marionette/lib/backbone.marionette'
-        sql: 'sql.js/js/sql'
-        knex: 'knex/knex',
         jasmine: 'jasmine/jasmine'
         jasmine_html: 'jasmine/jasmine-html'
         boot: 'jasmine/custom-boot'

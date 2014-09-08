@@ -4,6 +4,12 @@ define ['moment', 'build/models', 'build/views'], (moment, models, views) ->
         it 'should have a LogEntriesCollectionView', () ->
             expect(views.LogEntriesCollectionView).not.toBe(undefined)
 
+        it 'should show the current date', () ->
+            views.layout.render()
+            expect(views.layout.$el.find('#current-date').text()).toEqual(
+                moment().format('LLLL')
+            )
+
         describe 'log entry view', ->
             it 'should show its interval', () ->
                 entry = new models.LogEntryModel

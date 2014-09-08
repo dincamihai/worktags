@@ -52,6 +52,9 @@ define (require) ->
     layout = new marionette.LayoutView({
         template: templates["app/templates/layout.hbs"]
         id: "content"
+        templateHelpers:
+            current_date: ->
+                moment().format('LLLL')
         regions:
             command: "#command"
             log_entries: '#log-entries'
